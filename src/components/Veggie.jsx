@@ -4,9 +4,9 @@ import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css'
 
 
-function Veggie() {
 
-  const [veggie, setVeggie] = useState([]);
+function Veggie() {
+    const [veggie, setVeggie] = useState([]);
 
     useEffect(() => {
         getVeggie();
@@ -21,41 +21,45 @@ function Veggie() {
 
         }
         else{
-        const api = await fetch(`https://api.spoonacular.com/recipes/vegetarian?apiKey=${process.env.REACT_APP_API_KEY}&number=9&tags=vegetarian`);
+        const api = await fetch(`https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}&number=9&tags=vegetarian`);
         const data = await api.json();
         localStorage.setItem('veggie', JSON.stringify(data.recipes));
         setVeggie(data.recipes);
         }
     }
-  return (
-    <div><Wrapper> <h3>Our Vegetarian Picks</h3>
+
+  return <div>
+        <Wrapper> <h3>Our Vegetarian Picks</h3>
 
 
-    <Splide options={{
-      perPage: 3,
-      arrows: false,
-      pagination: false,
-      drag: 'free',
-      gap: "5rem",
-    }}>
-    {veggie.map((recipe) =>{
+        <Splide options={{
+          perPage: 3,
+          arrows: false,
+          pagination: false,
+          drag: 'free',
+          gap: "5rem",
+        }}>
+        {veggie.map((recipe) =>{
 
-      return(
-        <SplideSlide key={recipe.id}>
-      <Card>
-        <p>{recipe.title}</p>
-        <img src={recipe.image} alt={recipe.title} />
-        <Gradient/>
-      </Card>
+          return(
+            <SplideSlide key={recipe.id}>
+          <Card>
+            <p>{recipe.title}</p>
+            <img src={recipe.image} alt={recipe.title} />
+            <Gradient/>
+          </Card>
+          
+          </SplideSlide>
+          );
       
-      </SplideSlide>
-      );
-  
-      })};
-     </Splide>
-    </Wrapper></div>
-  )
+          })};
+         </Splide>
+        </Wrapper>
+    
+  </div>
+
 }
+
 const Wrapper = styled.div`
 margin: 4rem 0rem;
 `
@@ -99,6 +103,7 @@ position: absolute;
 width: 100%;
 height: 100%;
 background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.5));
+
 `
 
 export default Veggie
