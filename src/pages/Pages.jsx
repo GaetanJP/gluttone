@@ -8,5 +8,5 @@ function Pages() {
     </div>
   )
 }
-//JAMES IS A NEGRO HEHE
+
 export default Pages
